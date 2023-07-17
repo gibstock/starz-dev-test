@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <style>
+        .black {
+            background: #000;
+            height: 50%;
+            width: 50%;
+        }
+
+        h2,
+        p {
+            color: #fff;
+        }
+
+        .nav-box {
+            background: #000;
+            height: 200px;
+            width: 200px;
+            margin-top: 50px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+        }
+    </style>
+</head>
+<html>
+
+<body>
+
+    <div class="black">
+        <h2><span id="sidebar-title">MAIN <br>TITLE</span></h2>
+        <p><span id="sidebar-desc">This is the main text.</span></p>
+    </div>
+
+    <!-- 2 rollover triggers -->
+    <a id="style-guide-link" href="">
+        <div id="style-guides" class="nav-box">
+            <h3 class="nav-box-txt">TITLE 1</h3>
+        </div>
+    </a>
+    <a href="">
+        <div id="one-sheets" class="nav-box">
+            <h3 class="nav-box-txt">TITLE 2</h3>
+        </div>
+    </a>
+
+    <!-- change the local storage toggle div -->
+    <div id="deactivate" class="black nav-box active-dashboard">
+            <h2> COL 2 </h2>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+
+            // set the variable and console log results 
+            var active_dashboard = JSON.parse(true);
+            JSON.stringify(localStorage.setItem('active_dashboard', true));
+            console.log('dashboard active =' + active_dashboard);
+
+            // click function to toggle the local storage value
+            $("#deactivate").click(function () {
+                $("#deactivate").toggleClass('active-dashboard');
+                var active_dashboard = $('#deactivate').hasClass('active-dashboard'); //check the value on click has changed
+                JSON.stringify(localStorage.setItem('active_dashboard', active_dashboard)); //set the change in value to the localstorage on click
+                console.log('dashboard active =' + active_dashboard);
+
+            });
+
+            //rollover boxes change text
+            $("#style-guides").hover(function () {
+                $("#sidebar-title").html("TITLE <br> 1");
+                $("#sidebar-desc").html("Rollover text 1 here.");
+            },
+                function () {
+                    $("#sidebar-title").html("MAIN <BR> TITLE");
+                    $("#sidebar-desc").html("This is the main text.")
+                });
+            // box 2
+            $("#one-sheets").hover(function () {
+                $("#sidebar-title").html("TITLE <BR> 2");
+                $("#sidebar-desc").html("Rollover text 2 here.");
+            },
+                function () {
+                    $("#sidebar-title").html("MAIN <BR> TITLE");
+                    $("#sidebar-desc").html("This is the main text.")
+                });
+        });
+    </script>
+</body>
+
+</html>
